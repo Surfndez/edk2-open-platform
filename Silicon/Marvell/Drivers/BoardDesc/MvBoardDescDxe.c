@@ -96,6 +96,20 @@ MvBoardDescComPhyGet (
 
 STATIC
 EFI_STATUS
+MvBoardDescGpioGet (
+  IN MARVELL_BOARD_DESC_PROTOCOL  *This,
+  IN OUT MVHW_GPIO_DESC          **GpioDesc
+  )
+{
+  /*
+   * Get SoC data about all available GPIO controllers and
+   * and pass to further without any additonal processing.
+   */
+  return ArmadaSoCDescGpioGet (GpioDesc);
+}
+
+STATIC
+EFI_STATUS
 MvBoardDescI2cGet (
   IN MARVELL_BOARD_DESC_PROTOCOL  *This,
   IN OUT MV_BOARD_I2C_DESC       **I2cDesc
@@ -531,6 +545,7 @@ MvBoardDescInitProtocol (
   )
 {
   BoardDescProtocol->BoardDescComPhyGet = MvBoardDescComPhyGet;
+  BoardDescProtocol->BoardDescGpioGet = MvBoardDescGpioGet;
   BoardDescProtocol->BoardDescI2cGet = MvBoardDescI2cGet;
   BoardDescProtocol->BoardDescMdioGet = MvBoardDescMdioGet;
   BoardDescProtocol->BoardDescAhciGet = MvBoardDescAhciGet;
