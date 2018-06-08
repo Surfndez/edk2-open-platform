@@ -37,6 +37,22 @@ ArmadaSoCDescComPhyGet (
   );
 
 //
+// GPIO devices description template definition
+//
+#define MVHW_MAX_GPIO_DEVS       20
+typedef struct {
+  UINT8 GpioDevCount;
+  UINTN GpioBaseAddresses[MVHW_MAX_GPIO_DEVS];
+  UINTN GpioPinCount[MVHW_MAX_GPIO_DEVS];
+} MVHW_GPIO_DESC;
+
+EFI_STATUS
+EFIAPI
+ArmadaSoCDescGpioGet (
+  IN OUT MVHW_GPIO_DESC **GpioDesc
+  );
+
+//
 // I2C
 //
 typedef struct {
